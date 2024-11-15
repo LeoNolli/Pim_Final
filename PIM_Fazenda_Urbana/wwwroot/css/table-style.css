@@ -1,0 +1,145 @@
+﻿/* table-styles.css */
+
+/* Variáveis de cor */
+:root {
+    --primary-color: #005300;
+    --secondary-color: #009103;
+    --text-color: #000000;
+    --background-color: #ffffff;
+    --border-color: #005300;
+    --hover-color: #f1f1f1;
+}
+
+/* Estilo Geral da Tabela */
+.table {
+    width: 100%;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 1em 0;
+}
+
+    /* Cabeçalho da Tabela */
+    .table thead {
+        background-color: var(--primary-color);
+        color: var(--background-color);
+        font-weight: bold;
+    }
+
+        .table thead th {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+    /* Linhas da Tabela */
+    .table tbody tr {
+        border-bottom: 1px solid var(--border-color);
+    }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .table tbody tr:hover {
+            background-color: var(--hover-color);
+        }
+
+    /* Células da Tabela */
+    .table th, .table td {
+        padding: 10px;
+        border: 1px solid var(--border-color);
+        text-align: left;
+        vertical-align: middle;
+    }
+
+/* Texto e Ação */
+.text-success {
+    color: var(--secondary-color);
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+/* Estilos para Responsividade */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Estilos da tabela */
+.custom-table {
+    background-color: var(--white);
+    color: var(--black);
+    border: 1px solid var(--dark-green);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-header {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.table-bordered td, .table-bordered th {
+    border: 1px solid var(--dark-green);
+}
+
+/* Botões */
+.btn-outline-dark {
+    color: var(--black);
+    border-color: var(--dark-green);
+}
+
+    .btn-outline-dark:hover {
+        background-color: var(--dark-green);
+        color: var(--white);
+    }
+
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+    .btn-outline-danger:hover {
+        background-color: #a71d2a;
+        color: var(--white);
+    }
+
+/* Configuração para limitar o texto e exibir "..." */
+.text-truncate {
+    max-width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+    .table thead {
+        display: none;
+    }
+
+    .table tbody tr {
+        display: block;
+        margin-bottom: 1em;
+        border: 1px solid var(--border-color);
+    }
+
+    .table tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        border: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .button-text {
+        display: none;
+    }
+
+    .table tbody td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+}

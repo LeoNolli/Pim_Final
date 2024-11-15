@@ -1,0 +1,60 @@
+﻿@model IEnumerable<PIM_Fazenda_Urbana.Models.Insumo>
+
+@if (TempData["Error"] != null)
+{
+    <div id="error" class="alert alert-danger" role="alert">
+        @TempData["Error"]
+    </div>
+}
+
+<div class="container mt-4">
+    <h2 class="text-dark-green mb-4 text-center">Lista de Insumos</h2>
+
+    <!-- Botão para adicionar um novo insumo -->
+    <div class="mb-3 text-start">
+        <a href="@Url.Action("Create", "Insumo")" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Adicionar Insumo
+        </a>
+    </div>
+
+    <!-- Tabela de listagem de insumos -->
+    <div class="table-responsive">
+        <table class="table table-bordered custom-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var insumo in Model)
+                {
+                    <tr>
+                        <td data-label="ID">@insumo.InsumoId</td>
+                        <td data-label="Nome">@insumo.Nome</td>
+                        <td class="text-truncate" data-label="Descrição">@insumo.Descricao</td>
+                        <td data-label="Quantidade">@insumo.Quantidade</td>
+                        <td data-label="Preço">@insumo.Preco.ToString("C")</td>
+                        <td data-label="Ações">
+                            <div class="d-flex">
+                                <a href="@Url.Action("Edit", "Insumo", new { id = insumo.InsumoId })" class="btn btn-outline-dark btn-sm me-2">
+                                    <i class="bi bi-pencil-square"></i> <span class="button-text">Editar</span>
+                                </a>
+                                <form asp-action="Delete" asp-controller="Insumo" asp-route-id="@insumo.InsumoId" method="post" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este insumo?');">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-trash"></i> <span class="button-text">Excluir</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

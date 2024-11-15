@@ -1,0 +1,18 @@
+﻿@* Views/Shared/_HeaderUsuarioNaoLogado.cshtml *@
+<link rel="stylesheet" href="~/css/Logo.css" asp-append-version="true" />
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 .flex-row
+ justify-content-end">
+        <div class="container-fluid">
+
+            <div class="logo-container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/assets/PIM.svg" alt="Logo" alt="Logo" class="logo-svg img-fluid" /></a>
+            </div>
+            <div class="px-5">
+                <a class="btn btn-primary me-2" href="/Autenticacao/Login">Login</a>
+                <a class="btn btn-success" href="/Autenticacao/Registrar">Registrar</a>
+            </div>
+        </div>
+    </nav>
+</header>

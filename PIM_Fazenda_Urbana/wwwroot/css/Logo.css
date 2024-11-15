@@ -1,0 +1,17 @@
+﻿.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo-svg {
+    width: 100px; /* Ajuste a largura conforme desejar */
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .logo-svg {
+        width: 80px; /* Reduz a largura em telas menores */
+    }
+}

@@ -1,0 +1,14 @@
+﻿:root {
+    --dark-green: #005300;
+    --light-green: #009103;
+    --black: #000000;
+    --white: #ffffff;
+}
+
+.bg-light-green {
+    background-color: var(--light-green)
+}
+
+.bg-dark-green {
+    background-color: var(--dark-green)
+}

@@ -1,0 +1,75 @@
+﻿/* VendaDetalhes.css */
+
+/* Cores */
+:root {
+    --dark-green: #005300;
+    --light-green: #009103;
+    --black: #000000;
+    --white: #ffffff;
+}
+
+/* Container Principal */
+.container {
+    padding: 20px;
+}
+
+/* Título */
+.text-dark-green {
+    color: var(--dark-green);
+}
+
+/* Estilo do Cartão de Informações */
+.info-card {
+    background-color: var(--white);
+    border: 1px solid var(--dark-green);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+    .info-card .total {
+        font-size: 1.2em;
+        color: var(--light-green);
+        font-weight: bold;
+    }
+
+/* Estilo da Tabela */
+.table {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.table-header {
+    background-color: var(--dark-green);
+    color: var(--white);
+}
+
+.table th, .table td {
+    border: 1px solid var(--dark-green);
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #e9f7ec;
+}
+
+/* Botão de Voltar */
+.btn-dark-green {
+    background-color: var(--dark-green);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.1em;
+}
+
+    .btn-dark-green:hover {
+        background-color: var(--light-green);
+        color: var(--black);
+    }
+
+@media (max-width: 768px) {
+    .button-text {
+        display: none;
+    }
+}

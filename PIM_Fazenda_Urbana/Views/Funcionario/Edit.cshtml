@@ -1,0 +1,82 @@
+﻿@model PIM_Fazenda_Urbana.Models.Funcionario
+
+@{
+    ViewData["Title"] = "Atualizar Funcionário";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <div class="card shadow-sm border-1">
+                <div class="card-header text-center text-white bg-dark-green">
+                    <h3 class="mb-0">Atualizar Funcionário</h3>
+                </div>
+                <div class="card-body p-4">
+                    <h4 class="text-muted mb-4">ID: @Model.FuncionarioId</h4>
+
+                    <form asp-action="Edit" asp-controller="Funcionario">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <!-- Campo Cargo -->
+                        <div class="form-group mb-3">
+                            <label asp-for="Cargo" class="form-label fw-bold">Cargo</label>
+                            <input asp-for="Cargo" class="form-control" placeholder="Digite o cargo do funcionário" />
+                            <span asp-validation-for="Cargo" class="text-danger"></span>
+                        </div>
+
+                        <!-- Campo Nome -->
+                        <div class="form-group mb-3">
+                            <label asp-for="Nome" class="form-label fw-bold">Nome</label>
+                            <input asp-for="Nome" class="form-control" placeholder="Digite o nome completo" />
+                            <span asp-validation-for="Nome" class="text-danger"></span>
+                        </div>
+
+                        <!-- Campo CPF -->
+                        <div class="form-group mb-3">
+                            <label asp-for="CPF" class="form-label fw-bold">CPF</label>
+                            <input asp-for="CPF" class="form-control" placeholder="Digite o CPF" />
+                            <span asp-validation-for="CPF" class="text-danger"></span>
+                        </div>
+
+                        <!-- Campo RG -->
+                        <div class="form-group mb-3">
+                            <label asp-for="RG" class="form-label fw-bold">RG</label>
+                            <input asp-for="RG" class="form-control" placeholder="Digite o RG" />
+                            <span asp-validation-for="RG" class="text-danger"></span>
+                        </div>
+
+                        <!-- Campo Endereco -->
+                        <div class="form-group mb-3">
+                            <label asp-for="Endereco" class="form-label fw-bold">Endereço</label>
+                            <input asp-for="Endereco" class="form-control" placeholder="Digite o endereço completo" />
+                            <span asp-validation-for="Endereco" class="text-danger"></span>
+                        </div>
+
+                        <!-- Campo Telefone -->
+                        <div class="form-group mb-3">
+                            <label asp-for="Telefone" class="form-label fw-bold">Telefone</label>
+                            <input asp-for="Telefone" class="form-control" placeholder="Digite o telefone" />
+                            <span asp-validation-for="Telefone" class="text-danger"></span>
+                        </div>
+
+                        <!-- Botões de Ação -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <a asp-action="Index" class="btn btn-outline-dark w-100 me-1">
+                                <i class="bi bi-arrow-left"></i> Voltar à Lista
+                            </a>
+                            <button type="submit" class="btn text-white w-100 ms-1 bg-light-green">Salvar</button>
+                        </div>
+
+                        <input type="hidden" asp-for="FuncionarioId" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

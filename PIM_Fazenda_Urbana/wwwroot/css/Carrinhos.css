@@ -1,0 +1,36 @@
+﻿.cart-items-container {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.cart-item {
+    padding: 15px;
+}
+
+.cart-item-info h5 {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.order-summary {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+}
+
+.btn-outline-warning {
+    color: #ffc107;
+    border-color: #ffc107;
+}

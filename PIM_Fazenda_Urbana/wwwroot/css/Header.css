@@ -1,0 +1,56 @@
+﻿/* Estilos para o Header */
+
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 2px solid #005300;
+}
+
+.navbar-brand {
+    color: #005300;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    color: #005300;
+}
+
+.nav-link {
+    color: #005300 !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+    .nav-link:hover {
+        color: #009103 !important;
+    }
+
+/* Ícone de usuário e carrinho */
+.btn-group .btn-secondary {
+    background-color: #005300;
+    border: none;
+}
+
+.btn-group .dropdown-menu {
+    border: 1px solid #009103;
+}
+
+.btn-group .dropdown-item:hover {
+    background-color: #009103;
+    color: #ffffff;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navbar-nav .nav-item {
+        margin: 0.5rem 0;
+    }
+
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+}

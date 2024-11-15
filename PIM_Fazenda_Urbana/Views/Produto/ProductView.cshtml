@@ -1,0 +1,84 @@
+﻿@model Produto
+<link rel="stylesheet" href="~/css/ProductView.css" asp-append-version="true" />
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["Error"]
+    </div>
+}
+<div class="container mt-5">
+    <div class="row">
+        <!-- Coluna Esquerda - Informações do Produto -->
+        <div class="col-md-8">
+            <h2 class="fw-bold">@Model.Nome</h2>
+
+            <!-- Descrição do Produto -->
+            <div class="mt-4">
+                <h5>Descrição:</h5>
+                <p>@Model.Descricao</p>
+            </div>
+        </div>
+
+        <!-- Coluna Direita - Preço e Opções de Compra -->
+        <div class="col-md-4">
+            <!-- Preço do Produto -->
+            <div class="mb-4">
+                <p class="text-danger fs-3 fw-bold">R$ @Model.Preco.ToString("F2")</p>
+                <p class="text-muted small">Quantidade diponível: @Model.QuantidadeEstoque</p>
+            </div>
+
+            <!-- Formulário para Controle de Quantidade e Adição ao Carrinho -->
+            @if (!User.IsInRole("Cliente") && User.Identity.IsAuthenticated)
+            {
+                <div class="mb-4">
+                    <form asp-action="AdicionarAoCarrinho" asp-controller="Carrinho" method="post">
+                        <!-- Campos de Informações do CarrinhoItem -->
+                        <input type="hidden" name="ProdutoId" value="@Model.ProdutoId" />
+                        <input type="hidden" name="Nome" value="@Model.Nome" />
+                        <input type="hidden" name="Preco" value="@Model.Preco" />
+
+                        <!-- Controle de Quantidade -->
+                        <label for="quantidade" class="form-label">Quantidade:</label>
+                        <div class="d-flex align-items-center">
+                            <button type="button" class="btn btn-outline-secondary quantity-btn" data-action="decrease">-</button>
+                            <span class="px-3 quantity-value" id="quantity">1</span>
+                            <button type="button" class="btn btn-outline-secondary quantity-btn" data-action="increase">+</button>
+                        </div>
+                        <input type="hidden" name="Quantidade" id="quantidade-input" value="1" />
+
+                        <!-- Botão Adicionar ao Carrinho -->
+                        <div class="d-grid gap-2 mt-3">
+                            <button type="submit" class="btn btn-success btn-lg">Adicionar ao Carrinho</button>
+                        </div>
+                    </form>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const quantityElement = document.getElementById('quantity');
+            const quantityInput = document.getElementById('quantidade-input');
+            let quantity = parseInt(quantityElement.innerText) || 1;
+
+            document.querySelectorAll('.quantity-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const action = this.getAttribute('data-action');
+
+                    if (action === 'increase') {
+                        quantity++;
+                    } else if (action === 'decrease' && quantity > 1) {
+                        quantity--;
+                    }
+
+                    // Atualiza o valor da quantidade no HTML e no campo oculto do formulário
+                    quantityElement.innerText = quantity;
+                    quantityInput.value = quantity;
+                });
+            });
+        });
+    </script>
+}

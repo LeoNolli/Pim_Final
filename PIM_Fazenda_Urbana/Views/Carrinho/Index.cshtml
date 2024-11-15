@@ -1,0 +1,52 @@
+﻿@model Carrinho
+<link rel="stylesheet" href="~/css/Carrinhos.css" asp-append-version="true" />
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Coluna Esquerda - Itens do Carrinho -->
+        <div class="col-lg-8">
+            <h4 class="mb-4">Produtos no Carrinho</h4>
+            <div class="cart-items-container border rounded p-3 bg-light">
+                @foreach (var item in Model.Itens)
+                {
+                    <div class="cart-item d-flex justify-content-between align-items-center py-3 border-bottom">
+                        <div class="cart-item-info">
+                            <h5 class="fw-bold mb-1">@item.Nome</h5>
+                            <p class="text-muted small">Preço unitário: R$ @item.Preco.ToString("F2")</p>
+                            <p class="text-muted small">Quantidade: @item.Quantidade</p>
+                        </div>
+                        <div class="cart-item-total text-end">
+                            <p class="fw-bold">Total do item: R$ @item.TotalItem?.ToString("F2")</p>
+                            <form asp-action="RemoverDoCarrinho" asp-route-produtoId="@item.ProdutoId" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-link text-danger">Excluir</button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Coluna Direita - Resumo da Compra -->
+        <div class="col-lg-4">
+            <div class="order-summary border rounded p-4 bg-white shadow-sm">
+                <h5>Resumo da Compra</h5>
+                <div class="d-flex justify-content-between py-2">
+                    <span>Subtotal:</span>
+                    <span>R$ @Model.CalcularTotal().ToString("F2")</span>
+                </div>
+                <hr />
+                <div class="d-flex justify-content-between py-2">
+                    <strong>Total:</strong>
+                    <strong>R$ @Model.CalcularTotal().ToString("F2")</strong>
+                </div>
+                <form asp-action="Create" asp-controller="Venda" method="post">
+                    <button class="btn btn-primary w-100 mt-3">Concluir a compra</button>
+                </form>
+                <form asp-action="LimparCarrinho" method="post" class="mt-2">
+                    <button type="submit" class="btn btn-outline-danger w-100">Limpar Carrinho</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,144 @@
+﻿@model PIM_Fazenda_Urbana.Models.DTO.UsuarioFuncionarioRegistroDTO
+@{
+    ViewData["Title"] = "Cadastrar Funcionário";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <div class="card shadow-sm border-0">
+                <div class="card-header text-center text-white bg-dark-green">
+                    <h3 class="mb-0">Cadastrar Funcionário</h3>
+                </div>
+                <div class="card-body p-4">
+                    @if (TempData["RegisterError"] != null)
+                    {
+                        <div id="login-error" class="alert alert-danger" role="alert">
+                            @TempData["RegisterError"]
+                        </div>
+                    }
+
+                    <form method="post" asp-action="RegistrarFuncionarioAction" asp-controller="Autenticacao">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <!-- Formulário de Cadastro Completo -->
+                        <div class="form-group mb-3">
+                            <label asp-for="@Model.Email" class="form-label fw-bold">E-mail de login</label>
+                            <input type="text" asp-for="@Model.Email" class="form-control" placeholder="Digite o e-mail" required />
+                            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="@Model.Senha" class="form-label fw-bold">Senha</label>
+                            <input type="password" asp-for="@Model.Senha" class="form-control" placeholder="Digite a senha" required />
+                            <span asp-validation-for="@Model.Senha" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="@Model.ConfirmarSenha" class="form-label fw-bold">Confirmar senha</label>
+                            <input type="password" asp-for="@Model.ConfirmarSenha" class="form-control" placeholder="Confirme a senha" required />
+                            <span asp-validation-for="@Model.ConfirmarSenha" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="@Model.Nome" class="form-label fw-bold">Nome</label>
+                            <input type="text" asp-for="@Model.Nome" class="form-control" placeholder="Digite o nome" required />
+                            <span asp-validation-for="@Model.Nome" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="@Model.CPF" class="form-label fw-bold">CPF</label>
+                            <input type="text" asp-for="@Model.CPF" class="form-control" placeholder="Insira o CPF" required />
+                            <span asp-validation-for="@Model.CPF" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="@Model.RG" class="form-label fw-bold">RG</label>
+                            <input type="text" asp-for="@Model.RG" class="form-control" placeholder="Insira o RG" required />
+                            <span asp-validation-for="@Model.RG" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="@Model.Telefone" class="form-label fw-bold">Telefone</label>
+                            <input type="text" asp-for="@Model.Telefone" class="form-control" placeholder="Insira o telefone" required />
+                            <span asp-validation-for="@Model.Telefone" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="@Model.Endereco" class="form-label fw-bold">Endereço</label>
+                            <input type="text" asp-for="@Model.Endereco" class="form-control" placeholder="Insira o endereço" required />
+                            <span asp-validation-for="@Model.Endereco" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="@Model.Cargo" class="form-label fw-bold">Cargo</label>
+                            <input type="text" asp-for="@Model.Cargo" class="form-control" placeholder="Insira o cargo" required />
+                            <span asp-validation-for="@Model.Cargo" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="@Model.Funcao" class="form-label fw-bold">Nível de acesso</label>
+                            <select asp-for="@Model.Funcao" class="form-control form-select">
+                                <option value="Admin">Administrador</option>
+                                <option value="Gerente">Gerente</option>
+                                <option value="Comum">Comum</option>
+                            </select>
+                            <span asp-validation-for="Funcao" class="text-danger"></span>
+                        </div>
+
+                        <!-- Botões de Ação -->
+                        <div class="d-grid gap-2 d-sm-flex justify-content-sm-between mt-4">
+                            <a asp-action="Index" class="btn btn-outline-dark w-100 me-1">
+                                <i class="bi bi-arrow-left"></i> Voltar à Lista
+                            </a>
+                            <button type="submit" class="btn text-white w-100 ms-1 bg-light-green">Cadastrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const errorDiv = document.getElementById("login-error");
+
+        if (errorDiv) {
+            setTimeout(() => {
+                errorDiv.style.transition = "opacity 1s";
+                errorDiv.style.opacity = "0";
+                setTimeout(() => errorDiv.remove(), 1000);
+            }, 5000);
+        }
+
+        function validarCpf(cpf) {
+            cpf = cpf.replace(/[^\d]+/g, '');
+            if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+
+            let soma = 0;
+            for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
+            let resto = 11 - (soma % 11);
+            if (resto === 10 || resto === 11) resto = 0;
+            if (resto !== parseInt(cpf.charAt(9))) return false;
+
+            soma = 0;
+            for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
+            resto = 11 - (soma % 11);
+            if (resto === 10 || resto === 11) resto = 0;
+            if (resto !== parseInt(cpf.charAt(10))) return false;
+
+            return true;
+        }
+
+        document.querySelector('form').addEventListener('submit', function (event) {
+            const cpfInput = document.querySelector('[name="CPF"]');
+            if (!validarCpf(cpfInput.value)) {
+                event.preventDefault();
+                alert('CPF inválido');
+                cpfInput.focus();
+            }
+        });
+    </script>
+}

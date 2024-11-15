@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Produto>
+
+@if (TempData["Error"] != null)
+{
+    <div id="error" class="alert alert-danger" role="alert">
+        @TempData["Error"]
+    </div>
+}
+
+<div class="container mt-4">
+    <h2 class="text-dark-green mb-4 text-center">Lista de Produtos</h2>
+
+    <!-- Botão para adicionar novo produto alinhado à esquerda -->
+    <a href="@Url.Action("Create", "Produto")" class="btn btn-success mb-3">
+        <i class="bi bi-plus-circle"></i> <span class="button-text">Adicionar Produto</span>
+    </a>
+
+    <!-- Tabela de listagem de produtos -->
+    <div class="table-responsive">
+        <table class="table custom-table table-bordered">
+            <thead class="table-header">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Quantidade em Estoque</th>
+                    <th>Preço</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var produto in Model)
+                {
+                    <tr>
+                        <td data-label="ID">
+                            <a class="link-secondary" href="@Url.Action("ProductView", "Produto", new { id = produto.ProdutoId })">
+                            @produto.ProdutoId</a> </td>
+                        <td data-label="Nome" class="text-truncate">@produto.Nome</td>
+                        <td data-label="Descrição" class="text-truncate">@produto.Descricao</td>
+                        <td data-label="Quantidade">@produto.QuantidadeEstoque</td>
+                        <td data-label="Preço">@produto.Preco.ToString("C")</td>
+                        <td data-label="Ações">
+                            <div class="d-flex justify-content-center gap-1">
+                                <a href="@Url.Action("Edit", "Produto", new { id = produto.ProdutoId })" class="btn btn-outline-dark btn-sm">
+                                    <i class="bi bi-pencil-square"></i> <span class="button-text">Editar</span>
+                                </a>
+                                <a href="@Url.Action("Create", "ControleProducao", new { produtoId = produto.ProdutoId })" class="btn btn-outline-success btn-sm">
+                                    <i class="bi bi-gear-fill"></i> <span class="button-text">Produzir</span>
+                                </a>
+                                <form asp-action="Delete" asp-route-id="@produto.ProdutoId" method="post" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este produto?');">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-trash"></i> <span class="button-text">Excluir</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

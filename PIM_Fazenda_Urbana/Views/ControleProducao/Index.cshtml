@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ControleProducao>
+
+@if (TempData["Error"] != null)
+{
+    <div id="error" class="alert alert-danger" role="alert">
+        @TempData["Error"]
+    </div>
+}
+
+<div class="container mt-4">
+    <h2 class="text-dark-green mb-4 text-center">Lista de Produções</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Quantidade</th>
+                    <th>Data Início</th>
+                    <th>Data Conclusão</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var producao in Model)
+                {
+                    <tr>
+                        <td data-label="ID">@producao.ProducaoId</td>
+                        <td data-label="Quantidade">@producao.Quantidade</td>
+                        <td data-label="Data Início">@producao.DataInicio.ToString("dd/MM/yyyy")</td>
+                        <td data-label="Data Conclusão">
+                            @(
+                                producao.DataConclusao.HasValue
+                                ? producao.DataConclusao.Value.ToString("dd/MM/yyyy")
+                                : "N/A"
+                                )
+                        </td>
+                        <td data-label="Status">@producao.Status</td>
+                        <td data-label="Ações">
+                            <div class="d-flex">
+                                <a href="@Url.Action("Edit", "ControleProducao", new { id = producao.ProducaoId })" class="btn btn-outline-dark btn-sm me-2">
+                                    <i class="bi bi-pencil-square"></i> <span class="button-text">Editar</span>
+                                </a>
+                                <form asp-action="CompleteProduction" asp-controller="ControleProducao" asp-route-id="@producao.ProducaoId" method="post" class="d-inline">
+                                    <button type="submit"
+                                            class="btn btn-outline-success btn-sm me-2 @((producao.Status == "Concluida") ? "disabled-link" : "")"
+                                            style="pointer-events: @(producao.Status == "Concluida" ? "none" : "auto");">
+                                        <i class="bi bi-check-circle-fill"></i> <span class="button-text">Concluir</span>
+                                    </button>
+                                </form>
+                                <form asp-action="Delete" asp-route-id="@producao.ProducaoId" method="post" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir esta produção?');">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-trash"></i> <span class="button-text">Excluir</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Funcionario>
+
+@if (TempData["Error"] != null)
+{
+    <div id="error" class="alert alert-danger" role="alert">
+        @TempData["Error"]
+    </div>
+}
+
+<div class="container my-5">
+    <h2 class="text-center text-dark-green mb-4">Lista de Funcionários</h2>
+
+    <!-- Botão para adicionar um novo funcionário alinhado à esquerda -->
+    <div class="mb-3 text-start">
+        <a href="@Url.Action("Create", "Funcionario")" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> <span class="button-text">Adicionar Funcionário</span>
+        </a>
+    </div>
+
+    <!-- Tabela de listagem de funcionários -->
+    <div class="table-responsive">
+        <table class="table custom-table table-bordered">
+            <thead class="table-header">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>RG</th>
+                    <th>Endereço</th>
+                    <th>Telefone</th>
+                    <th>Cargo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var funcionario in Model)
+                {
+                    <tr>
+                        <td data-label="ID">@funcionario.FuncionarioId</td>
+                        <td data-label="Nome" class="text-truncate">@funcionario.Nome</td>
+                        <td data-label="CPF">@funcionario.CPF</td>
+                        <td data-label="RG">@funcionario.RG</td>
+                        <td data-label="Endereço" class="text-truncate">@funcionario.Endereco</td>
+                        <td data-label="Telefone">@funcionario.Telefone</td>
+                        <td data-label="Cargo">@funcionario.Cargo</td>
+                        <td data-label="Ações" class="text-center">
+                            <div class="d-flex">
+                                <a href="@Url.Action("Edit", "Funcionario", new { id = funcionario.FuncionarioId })" class="btn btn-outline-dark btn-sm me-2">
+                                    <i class="bi bi-pencil-square"></i> <span class="button-text">Editar</span>
+                                </a>
+                                <form asp-action="Delete" asp-route-id="@funcionario.FuncionarioId" method="post" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este funcionário?');">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-trash"></i> <span class="button-text">Excluir</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/css/table-styles.css" asp-append-version="true" />

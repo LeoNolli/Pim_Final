@@ -1,0 +1,71 @@
+﻿/* VendaIndex.css */
+
+/* Cores */
+:root {
+    --dark-green: #005300;
+    --light-green: #009103;
+    --black: #000000;
+    --white: #ffffff;
+}
+
+/* Estilo da página */
+.container {
+    padding: 20px;
+}
+
+.text-dark-green {
+    color: var(--dark-green);
+}
+
+/* Estilo da Tabela */
+.table {
+    background-color: var(--white);
+    color: var(--black);
+    box-shadow: 0 4px 8px var(--dark-green), 0 6px 20px 10px rgba(0, 0, 0, 0.19);
+}
+
+.table-header {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.table th, .table td {
+    vertical-align: middle;
+    border: 1px solid var(--black);
+}
+
+.table-row:hover {
+    background-color: #f1f1f1;
+}
+
+.text-light-green {
+    color: var(--light-green);
+}
+
+/* Botões */
+.btn-outline-dark {
+    color: var(--black);
+    border-color: var(--dark-green);
+}
+
+    .btn-outline-dark:hover {
+        background-color: var(--dark-green);
+        color: var(--white);
+    }
+
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+    .btn-outline-danger:hover {
+        background-color: #a71d2a;
+        color: var(--white);
+    }
+
+/* Ajustes de responsividade */
+@media (max-width: 768px) {
+    .button-text {
+        display: none;
+    }
+}

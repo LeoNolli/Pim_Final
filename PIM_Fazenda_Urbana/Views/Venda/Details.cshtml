@@ -1,0 +1,66 @@
+﻿@model PIM_Fazenda_Urbana.Models.ViewModels.VendaViewModel
+@{
+    ViewData["Title"] = "Detalhes da Venda";
+}
+@if (TempData["Sucess"] != null)
+{
+    <div id="error" class="alert alert-success" role="alert">
+        @TempData["Sucess"]
+    </div>
+}
+<link rel="stylesheet" href="~/css/VendaDetails.css" asp-append-version="true" />
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-dark-green">Detalhes da Venda</h2>
+
+    <!-- Informações Gerais da Venda -->
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <div class="info-card">
+                <h5 class="fw-bold text-dark-green">Informações da Venda</h5>
+                <p><strong>Data e Hora:</strong> @Model.DataHora.ToString("dd/MM/yyyy HH:mm")</p>
+                <p><strong>ID do Cliente:</strong> @Model.ClienteId</p>
+                <p><strong>ID do Funcionário:</strong> @Model.Funcionario.FuncionarioId</p>
+                <p class="total"><strong>Total:</strong> R$ @Model.Total.ToString("F2")</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela de Itens da Venda -->
+    <h5 class="text-dark-green">Itens da Venda</h5>
+    <div class="table-responsive mb-5">
+        <table class="table table-hover table-striped">
+            <thead class="table-header">
+                <tr>
+                    <th>ID do Produto</th>
+                    <th>Nome</th>
+                    <th>Preço Unitário</th>
+                    <th>Quantidade</th>
+                    <th>Total do Item</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Itens)
+                {
+                    <tr>
+                        <td>@item.ProdutoId</td>
+                        <td>@item.Nome</td>
+                        <td>R$ @item.PrecoVenda.ToString("F2")</td>
+                        <td>@item.Quantidade</td>
+                        <td class="text-light-green">R$ @((item.PrecoVenda * item.Quantidade).ToString("F2"))</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Botão de Voltar -->
+    <div class="d-flex justify-content-center">
+        <a asp-action="Index" class="btn btn-dark-green">
+            <i class="bi bi-arrow-left"></i> <span class="button-text">Voltar à Lista de Vendas</span>
+        </a>
+    </div>
+</div>
+
+<!-- Link para os ícones do Bootstrap -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
